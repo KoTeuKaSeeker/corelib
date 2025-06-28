@@ -1,16 +1,11 @@
 from .data_handler import DataHandler
 import os
-import xml.etree.ElementTree as ET
 import numpy as np
-import re
-from ..data.mask import Mask
 from ..data.box import Box
-from ..containers.video_image_container import VideoImageContainer
 from ..data.annotation_bundle import AnnotationBundle
 from typing import List
 import json
 from src.containers.explicit_image_container import ExplicitImageContainer
-from ..data.box import Box
 
 
 class RTSDHandler(DataHandler):

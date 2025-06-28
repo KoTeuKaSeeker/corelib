@@ -26,6 +26,7 @@ class RTSDHandler(DataHandler):
                 image_container = ExplicitImageContainer(image_path)
 
                 bundle = AnnotationBundle([], image_container)
+                print(image_id_to_bundles)
                 image_id_to_bundles[image_id] = bundle
             
             label = id_to_name[annotation_dict["category_id"]]

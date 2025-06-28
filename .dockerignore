@@ -1,0 +1,31 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.*env
+.python-version
+.ipynb_checkpoints
+
+# IDE
+.vscode/
+.idea/
+*.bak
+
+# Dynaconf secret
+.secrets.*
+
+# Hypothesis
+.hypothesis
+
+# Maintenance
+rasa/.rasa
+.git
+.dockerignore
+.gitattributes
+.gitignore
+.gitlab-ci.yml
+CICD/
+Dockerfile*
+README.md

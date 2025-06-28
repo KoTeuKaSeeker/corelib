@@ -1,0 +1,26 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.*env
+.python-version
+.ipynb_checkpoints
+
+# IDE
+.vscode/
+.idea/
+*.bak
+
+# Dynaconf secret
+.secrets.*
+
+# Hypothesis
+.hypothesis
+
+dist
+*.egg-info
+
+models
+output

@@ -12,10 +12,12 @@ class AnnotationBundle(IDrawable):
         self._annotations = annotations
         self._image_container = image_container
         self._lableable = lableable
-
+        
+        self.bind_annotations()
+    
+    def bind_annotations(self):
         for annotation in self._annotations:
             annotation._annotation_bundle = self
-    
 
     @property
     def annotations(self):

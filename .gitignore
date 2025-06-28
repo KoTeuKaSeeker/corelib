@@ -22,5 +22,6 @@ __pycache__/
 dist
 *.egg-info
 
-models
-output
+/models/
+/output/
+/datasets/

@@ -15,7 +15,7 @@ class RTSDHandler(DataHandler):
     def _handle_json(self, obj: dict, dataset_path: str, id_to_name: dict[int, str], is_val: bool) -> List[AnnotationBundle]:
         image_id_to_image_dicts = {image_dict["id"]: image_dict for image_dict in obj["images"]}
 
-        image_id_to_bundles: dict[int, AnnotationBundle] = []
+        image_id_to_bundles: dict[int, AnnotationBundle] = {}
         for annotation_dict in obj["annotations"]:
             image_id = annotation_dict["image_id"]
 

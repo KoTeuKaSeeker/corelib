@@ -1,10 +1,9 @@
-from abc import ABC
 import numpy as np
 from ..containers.explicit_image_container import ExplicitImageContainer
 from ..visualizer.drawable import IDrawable
 from .annotation_bundle import AnnotationBundle
 
-class Annotation(ABC, IDrawable):
+class Annotation(IDrawable):
     def __init__(self, 
                  points: np.ndarray,
                  points_n: np.ndarray,

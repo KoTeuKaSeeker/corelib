@@ -4,6 +4,7 @@ from .cvat_video_handler import CvatVideoHandler
 from .yolo_image_handler import YoloImageHandler
 from .yolo_seg_image_handler import YoloSegImageHandler
 from .traffic_light_detection_dataset_handler import TrafficLightDetectionDatasetHandler
+from src.handlers.rtsd_handler import RTSDHandler
 
 class DataHandlerFactory:
     @staticmethod
@@ -13,7 +14,8 @@ class DataHandlerFactory:
             "cvat-video": CvatVideoHandler,
             "yolo-seg": YoloSegImageHandler,
             "yolo": YoloImageHandler,
-            "traffic-light-detection-dataset": TrafficLightDetectionDatasetHandler
+            "traffic-light-detection-dataset": TrafficLightDetectionDatasetHandler,
+            "rtsd": RTSDHandler
         }
         
         if format_name not in switch:

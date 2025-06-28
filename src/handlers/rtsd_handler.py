@@ -76,4 +76,4 @@ class RTSDHandler(DataHandler):
 
     
     def save(self, annotation_bundels: List[AnnotationBundle], label_names: List[str], path: str, validation_split: int):
-        super().save(annotation_bundels, label_names, path, validation_split)s
+        super().save(annotation_bundels, label_names, path, validation_split)

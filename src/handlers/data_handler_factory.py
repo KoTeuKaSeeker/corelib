@@ -5,6 +5,7 @@ from .yolo_image_handler import YoloImageHandler
 from .yolo_seg_image_handler import YoloSegImageHandler
 from .traffic_light_detection_dataset_handler import TrafficLightDetectionDatasetHandler
 from src.handlers.rtsd_handler import RTSDHandler
+from src.handlers.lisa_handler import LisaHandler
 
 class DataHandlerFactory:
     @staticmethod
@@ -15,7 +16,8 @@ class DataHandlerFactory:
             "yolo-seg": YoloSegImageHandler,
             "yolo": YoloImageHandler,
             "traffic-light-detection-dataset": TrafficLightDetectionDatasetHandler,
-            "rtsd": RTSDHandler
+            "rtsd": RTSDHandler,
+            "lisa": LisaHandler
         }
         
         if format_name not in switch:

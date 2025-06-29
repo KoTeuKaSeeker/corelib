@@ -25,3 +25,5 @@ dist
 /models/
 /output/
 /datasets/
+
+venv

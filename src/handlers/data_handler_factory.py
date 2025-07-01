@@ -7,6 +7,8 @@ from .traffic_light_detection_dataset_handler import TrafficLightDetectionDatase
 from src.handlers.rtsd_handler import RTSDHandler
 from src.handlers.lisa_handler import LisaHandler
 from src.handlers.s2tld_handler import S2TLDHandler
+from .bosch_handler import BoschHandler
+
 
 class DataHandlerFactory:
     @staticmethod
@@ -20,6 +22,7 @@ class DataHandlerFactory:
             "rtsd": RTSDHandler,
             "lisa": LisaHandler,
             "s2tld": S2TLDHandler,
+            "bosch": BoschHandler
         }
         
         if format_name not in switch:

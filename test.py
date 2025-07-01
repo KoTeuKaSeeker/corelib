@@ -4,11 +4,11 @@ from src.core.core import Core
 import cv2
 
 if  __name__ == "__main__":
-    bosch_core = Core(dataset_path="dataset_train_rgb", dataset_format="bosch")
+    lisa_core = Core("D:/datasets/lisa", "lisa")
 
     palette = PaletteRegister().rainbow()
-    print("I show something")
-    for annotation_bundle in bosch_core._annotation_bundles:
+
+    for annotation_bundle in lisa_core._annotation_bundles[1980:]:
         annotation_bundle: AnnotationBundle
 
         image = annotation_bundle.image_container.get_image()

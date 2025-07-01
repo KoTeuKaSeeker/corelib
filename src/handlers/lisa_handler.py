@@ -96,8 +96,8 @@ class LisaHandler(DataHandler):
 
                 points = [[x1, y1], [x2, y2]]
 
-                points_n = points.copy() / image_shape
-
+                points_n = points.copy() / image_shape # Нормализация
+ 
                 box = Box(points, points_n, label, image_container, False)
 
                 annotations.append(box)

@@ -6,6 +6,7 @@ from src.visualizer.palette.abstract_palette import AbstractPalette
 from src.visualizer.palette.palette_register import palette_register
 from ..lable_interface import ILableable
 import copy
+import random
 
 
 class Core(ILableable):
@@ -21,25 +22,27 @@ class Core(ILableable):
         for bundle in self._annotation_bundles:
             bundle._lableable = self
 
-
     def export(self, output_path: str, dataset_format: str, validation_split: float):
         handler = DataHandlerFactory.create_handler(dataset_format)
         handler.save(self._annotation_bundles, self._label_names, output_path, validation_split)
     
-
-    def merge(self, core):
+    def merge(self, core) -> "Core":
         self._annotation_bundles += core._annotation_bundles
         self._label_names = list(set(self._label_names + core._label_names))
 
         for bundle in core._annotation_bundles:
             bundle._lableable = self
+        
+        return self
 
+    def shuffle(self) -> "Core":
+        random.shuffle(self._annotation_bundles)
+        return self
 
     def annotate(self, model: AbstractModel, verbose=True):
         model.annotate(self._annotation_bundles, verbose=verbose)
         self._label_names = list(set(self._label_names + model.get_label_names()))
     
-
     def set_label_names_from_annotations_labels(self):
         '''
             Делает, чтобы использовались только те лейблы, которые присутствуют
@@ -52,10 +55,8 @@ class Core(ILableable):
         
         self._label_names = list(labels)
     
-
     def get_labels(self):
         return self._label_names
-
 
     def filter_bundles(self, labels, max_bundles=-1):
         filtred_bundles = set()
@@ -74,7 +75,6 @@ class Core(ILableable):
             bundle.annotations = list(filter(lambda annotation: annotation.label in labels, bundle.annotations))
 
         self._annotation_bundles = list(filtred_bundles)
-
 
     def filter_bundles_with_losses(self, labels, max_bundles):
         counts = {label: 0 for label in labels}
@@ -108,7 +108,6 @@ class Core(ILableable):
 
         self._annotation_bundles = list(filtred_bundles)
     
-
     def filter_and_split(self, labels, max_bundles, filter_with_loses=False):
         annotation_bundles = set(self._annotation_bundles)
         
@@ -130,9 +129,6 @@ class Core(ILableable):
         remaining_core._label_names = list(remaning_labels)
 
         return remaining_core
-        
-
-
 
     def count_annotations(self, verbose=0):
         counts = {label: 0 for label in self._label_names}
@@ -146,7 +142,6 @@ class Core(ILableable):
                 print(f"{label}: {count}")
 
         return counts
-
 
     def show_bundles(self, palette: AbstractPalette = palette_register.palettes["rainbow"], target_width: int = 1000):
         for bundle in self._annotation_bundles:

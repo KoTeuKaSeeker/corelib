@@ -26,16 +26,20 @@ class RTSDHandler(DataHandler):
                 image_container = ExplicitImageContainer(image_path)
 
                 bundle = AnnotationBundle([], image_container)
-                print(image_id_to_bundles)
                 image_id_to_bundles[image_id] = bundle
             
             label = id_to_name[annotation_dict["category_id"]]
+            
+            x, y, width, height = annotation_dict["bbox"]
 
-            points = np.array(annotation_dict["bbox"]).reshape(-1, 2)
-            points_n = points / np.ndarray(bundle.image_container.get_image_shape())
+            points = np.array([x, y, x + width, y + height]).reshape(-1, 2)
+            points_n = points / np.array(bundle.image_container.get_image_shape())
 
             annotation = Box(points, points_n, label, bundle.image_container, is_val, bundle)
             bundle.annotations.append(annotation)
+
+            self.logger.print_counter(self.__counter)
+            self.__counter += 1
         
         bundles = list(image_id_to_bundles.values())
         for bundle in bundles:
@@ -48,8 +52,8 @@ class RTSDHandler(DataHandler):
 
         label_map_path = os.path.join(path, "label_map.json")
 
-        rtsd_train_json_path = os.path.join(path, "train_anno.json")
-        rtsd_val_json_path = os.path.join(path, "val_anno.json")
+        rtsd_train_json_path = os.path.join(path, "train_anno.json") # "train_anno.json" "train_anno_reduced.json"
+        rtsd_val_json_path = os.path.join(path, "val_anno.json") # "val_anno.json"
 
         with open(rtsd_train_json_path, "r", encoding="utf-8") as file:
             train_json = json.load(file)
@@ -63,6 +67,12 @@ class RTSDHandler(DataHandler):
         label_names = list(name_to_id.keys())
         id_to_name = {v: k for k, v in name_to_id.items()}
 
+        train_annotations_count = len(train_json["annotations"])
+        val_annotations_count = len(val_json["annotations"])
+        annotations_count = train_annotations_count + val_annotations_count
+        self.logger.set_max_count(annotations_count)
+
+        self.__counter = 0
         train_bundles = self._handle_json(train_json, path, id_to_name, is_val=False)
         val_bundles = self._handle_json(val_json, path, id_to_name, is_val=True)
 

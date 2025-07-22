@@ -5,6 +5,10 @@ from .yolo_image_handler import YoloImageHandler
 from .yolo_seg_image_handler import YoloSegImageHandler
 from .traffic_light_detection_dataset_handler import TrafficLightDetectionDatasetHandler
 from src.handlers.rtsd_handler import RTSDHandler
+from src.handlers.lisa_handler import LisaHandler
+from src.handlers.s2tld_handler import S2TLDHandler
+from .bosch_handler import BoschHandler
+
 
 class DataHandlerFactory:
     @staticmethod
@@ -15,7 +19,10 @@ class DataHandlerFactory:
             "yolo-seg": YoloSegImageHandler,
             "yolo": YoloImageHandler,
             "traffic-light-detection-dataset": TrafficLightDetectionDatasetHandler,
-            "rtsd": RTSDHandler
+            "rtsd": RTSDHandler,
+            "lisa": LisaHandler,
+            "s2tld": S2TLDHandler,
+            "bosch": BoschHandler
         }
         
         if format_name not in switch:
